@@ -1,0 +1,30 @@
+services:
+  # Development services
+  postgres:
+    image: ghcr.io/serverpod/postgres:16
+    ports:
+      - "8090:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: magic_recipe
+      POSTGRES_PASSWORD: "5Myh93onxwR5QbYDW-cpa8rY9plVflDk"
+    volumes:
+      - magic_recipe_data:/var/lib/postgresql/data
+
+
+  # Test services
+  postgres_test:
+    image: ghcr.io/serverpod/postgres:16
+    ports:
+      - "9090:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: magic_recipe_test
+      POSTGRES_PASSWORD: "PiCvqlGWJiNMLOOpMxMBgBt8r4T4eq9a"
+    volumes:
+      - magic_recipe_test_data:/var/lib/postgresql/data
+
+
+volumes:
+  magic_recipe_data:
+  magic_recipe_test_data:
