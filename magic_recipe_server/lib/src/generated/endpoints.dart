@@ -15,6 +15,7 @@ import 'package:serverpod_auth_core_server/serverpod_auth_core_server.dart'
     as _iacs;
 import 'package:serverpod_auth_idp_server/serverpod_auth_idp_server.dart'
     as _iais;
+import '../../recipes/endpoints/recipes_endpoint.dart' as _iju9bi6j;
 import '../auth/email_idp_endpoint.dart' as _iuc1hd5t;
 import '../auth/jwt_refresh_endpoint.dart' as _inwq3ztq;
 import '../greetings/greeting_endpoint.dart' as _il624ik7;
@@ -23,6 +24,12 @@ class Endpoints extends _is.EndpointDispatch {
   @override
   void initializeEndpoints(_is.Server server) {
     var endpoints = <String, _is.Endpoint>{
+      'recipes': _iju9bi6j.RecipesEndpoint()
+        ..initialize(
+          server,
+          'recipes',
+          null,
+        ),
       'emailIdp': _iuc1hd5t.EmailIdpEndpoint()
         ..initialize(
           server,
@@ -42,6 +49,31 @@ class Endpoints extends _is.EndpointDispatch {
           null,
         ),
     };
+    connectors['recipes'] = _is.EndpointConnector(
+      name: 'recipes',
+      endpoint: endpoints['recipes']!,
+      methodConnectors: {
+        'generatedRecipe': _is.MethodConnector(
+          name: 'generatedRecipe',
+          params: {
+            'ingredients': _is.ParameterDescription(
+              name: 'ingredients',
+              type: _is.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call:
+              (
+                _is.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['recipes'] as _iju9bi6j.RecipesEndpoint)
+                  .generatedRecipe(
+                    session,
+                    params['ingredients'],
+                  ),
+        ),
+      },
+    );
     connectors['emailIdp'] = _is.EndpointConnector(
       name: 'emailIdp',
       endpoint: endpoints['emailIdp']!,

@@ -1,3 +1,5 @@
+recipes:
+  - generatedRecipe:
 emailIdp:
   - login:
   - startRegistration:
