@@ -14,6 +14,8 @@ import 'dart:async' as _ida;
 import 'package:http/http.dart' as _i85jenna;
 import 'package:magic_recipe_client/src/protocol/greetings/greeting.dart'
     as _i7bygspo;
+import 'package:magic_recipe_client/src/protocol/recipes/recipe.dart'
+    as _ihwngfrm;
 import 'package:serverpod_auth_core_client/serverpod_auth_core_client.dart'
     as _iacc;
 import 'package:serverpod_auth_idp_client/serverpod_auth_idp_client.dart'
@@ -28,11 +30,18 @@ class EndpointRecipes extends _isc.EndpointRef {
   @override
   String get name => 'recipes';
 
-  _ida.Future<String> generatedRecipe(String ingredients) =>
-      caller.callServerEndpoint<String>(
+  _ida.Future<_ihwngfrm.Recipe> generatedRecipe(String ingredients) =>
+      caller.callServerEndpoint<_ihwngfrm.Recipe>(
         'recipes',
         'generatedRecipe',
         {'ingredients': ingredients},
+      );
+
+  _ida.Future<List<_ihwngfrm.Recipe>> getRecipes() =>
+      caller.callServerEndpoint<List<_ihwngfrm.Recipe>>(
+        'recipes',
+        'getRecipes',
+        {},
       );
 }
 

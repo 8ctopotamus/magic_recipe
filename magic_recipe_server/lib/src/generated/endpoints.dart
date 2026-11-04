@@ -72,6 +72,16 @@ class Endpoints extends _is.EndpointDispatch {
                     params['ingredients'],
                   ),
         ),
+        'getRecipes': _is.MethodConnector(
+          name: 'getRecipes',
+          params: {},
+          call:
+              (
+                _is.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['recipes'] as _iju9bi6j.RecipesEndpoint)
+                  .getRecipes(session),
+        ),
       },
     );
     connectors['emailIdp'] = _is.EndpointConnector(

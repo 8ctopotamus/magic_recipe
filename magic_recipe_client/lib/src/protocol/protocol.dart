@@ -11,13 +11,17 @@
 // ignore_for_file: dead_code, unnecessary_type_check
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:magic_recipe_client/src/protocol/recipes/recipe.dart'
+    as _ihwngfrm;
 import 'package:serverpod_auth_core_client/serverpod_auth_core_client.dart'
     as _iacc;
 import 'package:serverpod_auth_idp_client/serverpod_auth_idp_client.dart'
     as _iaic;
 import 'package:serverpod_client/serverpod_client.dart' as _isc;
 import 'greetings/greeting.dart' as _izw8z7ou;
+import 'recipes/recipe.dart' as _ihz7f6c5;
 export 'greetings/greeting.dart';
+export 'recipes/recipe.dart';
 export 'client.dart';
 
 class Protocol extends _isc.SerializationManager {
@@ -57,8 +61,20 @@ class Protocol extends _isc.SerializationManager {
     if (t == _izw8z7ou.Greeting) {
       return _izw8z7ou.Greeting.fromJson(data) as T;
     }
+    if (t == _ihz7f6c5.Recipe) {
+      return _ihz7f6c5.Recipe.fromJson(data) as T;
+    }
     if (t == _isc.getType<_izw8z7ou.Greeting?>()) {
       return (data != null ? _izw8z7ou.Greeting.fromJson(data) : null) as T;
+    }
+    if (t == _isc.getType<_ihz7f6c5.Recipe?>()) {
+      return (data != null ? _ihz7f6c5.Recipe.fromJson(data) : null) as T;
+    }
+    if (t == List<_ihwngfrm.Recipe>) {
+      return (data as List)
+              .map((e) => deserialize<_ihwngfrm.Recipe>(e))
+              .toList()
+          as T;
     }
     try {
       return _iaic.Protocol().deserialize<T>(data, t);
@@ -72,6 +88,7 @@ class Protocol extends _isc.SerializationManager {
   static String? getClassNameForType(Type type) {
     return switch (type) {
       _izw8z7ou.Greeting => 'Greeting',
+      _ihz7f6c5.Recipe => 'Recipe',
       _ => null,
     };
   }
@@ -91,6 +108,8 @@ class Protocol extends _isc.SerializationManager {
     switch (data) {
       case _izw8z7ou.Greeting():
         return 'Greeting';
+      case _ihz7f6c5.Recipe():
+        return 'Recipe';
     }
     className = _iaic.Protocol().getClassNameForObject(data);
     if (className != null) {
@@ -115,6 +134,9 @@ class Protocol extends _isc.SerializationManager {
     }
     if (dataClassName == 'Greeting') {
       return deserialize<_izw8z7ou.Greeting>(data['data']);
+    }
+    if (dataClassName == 'Recipe') {
+      return deserialize<_ihz7f6c5.Recipe>(data['data']);
     }
     if (dataClassName.startsWith('serverpod_auth_idp.')) {
       data['className'] = dataClassName.substring(19);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'client.dart';
-import 'screens/greetings_screen.dart';
+// import 'screens/greetings_screen.dart';
 import 'screens/recipe_screen.dart';
 
 void main() async {

@@ -15,6 +15,8 @@ import 'dart:async' as _ida;
 import 'dart:io' as _idi;
 import 'package:magic_recipe_server/src/generated/greetings/greeting.dart'
     as _i7hzw3m2;
+import 'package:magic_recipe_server/src/generated/recipes/recipe.dart'
+    as _iz9ni6l0;
 import 'package:serverpod/serverpod.dart' as _is;
 import 'package:serverpod_auth_core_server/serverpod_auth_core_server.dart'
     as _iacs;
@@ -197,7 +199,7 @@ class _RecipesEndpoint {
 
   final _is.SerializationManager _serializationManager;
 
-  _ida.Future<String> generatedRecipe(
+  _ida.Future<_iz9ni6l0.Recipe> generatedRecipe(
     _ist.TestSessionBuilder sessionBuilder,
     String ingredients,
   ) async {
@@ -220,7 +222,37 @@ class _RecipesEndpoint {
                   _localUniqueSession,
                   _localCallContext.arguments,
                 )
-                as _ida.Future<String>);
+                as _ida.Future<_iz9ni6l0.Recipe>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+
+  _ida.Future<List<_iz9ni6l0.Recipe>> getRecipes(
+    _ist.TestSessionBuilder sessionBuilder,
+  ) async {
+    return _ist.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _ist.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'recipes',
+            method: 'getRecipes',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'recipes',
+          methodName: 'getRecipes',
+          parameters: _ist.testObjectToJson({}),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _ida.Future<List<_iz9ni6l0.Recipe>>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
